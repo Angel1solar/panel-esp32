@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Control ESP32 - MQTT</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px #aaa;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .on { background: #4CAF50; color: white; }
+        .off { background: #c62828; color: white; }
+        .indicator {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Panel de Control ESP32</h2>
+
+<!-- ESTADO SENSOR -->
+<div class="card">
+    <h3>Sensores</h3>
+    <p>Temperatura: <span id="temp">--</span> °C</p>
+    <p>Humedad: <span id="hum">--</span> %</p>
+</div>
+
+<!-- ENTRADAS DIGITALES -->
+<div class="card">
+    <h3>Entradas Digitales</h3>
+    <p>IN12: <span id="in12">--</span></p>
+    <p>IN14: <span id="in14">--</span></p>
+    <p>IN27: <span id="in27">--</span></p>
+    <p>IN26: <span id="in26">--</span></p>
+</div>
+
+<!-- SALIDAS -->
+<div class="card">
+    <h3>Control de Salidas</h3>
+    <button class="on" onclick="publish('riego/control','ON')">Salida 4/16 ON</button>
+    <button class="off" onclick="publish('riego/control','OFF')">Salida 4/16 OFF</button>
+</div>
+
+<!-- VENTILADOR -->
+<div class="card">
+    <h3>Ventilador</h3>
+    <button class="on" onclick="publish('riego/fan','ON')">Encender</button>
+    <button class="off" onclick="publish('riego/fan','OFF')">Apagar</button>
+</div>
+
+<!-- INDICADORES -->
+<div class="card">
+    <h3>Indicadores LED</h3>
+    <button class="on" onclick="publish('riego/luces','1')">LED 1 ON</button>
+    <button class="on" onclick="publish('riego/luces','2')">LED 2 ON</button>
+    <button class="on" onclick="publish('riego/luces','3')">LED 3 ON</button>
+
+    <button class="off" onclick="publish('riego/luces','OFF1')">LED 1 OFF</button>
+    <button class="off" onclick="publish('riego/luces','OFF2')">LED 2 OFF</button>
+    <button class="off" onclick="publish('riego/luces','OFF3')">LED 3 OFF</button>
+</div>
+
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
